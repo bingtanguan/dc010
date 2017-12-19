@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    canvas {
+        margin-top: 30px;
+        border: 10px solid #ccc
+    }
+    input {
+        margin-top: 10px;
+        width: 200px;
+        height: 20px;
+        border-radius: 10px;
+        box-shadow: none;
+        border: 1px solid #ccc;
+        text-indent: 10px;
+        outline: none;
+    }
+    </style>
+</head>
+<body>
+    <input type="text" id="width" placeholder="画布宽度">
+    <input type="text" id="height" placeholder="画布高度">
+    <br>
+    <br>
+
+    图片
+    <input type="file" id="image">
+    <br>
+    字号
+    <input type="text" id="size">
+    颜色
+    <input type="text" id="color">
+
+    <br>
+    名字
+    <input type="text" id="text">
+    <br>
+    <canvas id="canvas" width=1000 height=1000 style="width: 500px; width: 500px;"></canvas>
+    <script>
+        const $ = x=>document.querySelector(x)
+        const canvas = document.querySelector('#canvas')
+
+        const ctx = canvas.getContext('2d')
+
+        const conf = {
+            img: null,
+            text: null,
+            x: 100,
+            y: 1,
+            size: 100,
+            width: 1000,
+            height: 1000,
+            color: 'black'
+        }
+
+
+        const image = $('#image')
+        const fr = new FileReader()
+        const img = new Image()
+        fr.onload = (e) => {
+            img.src = e.target.result
+            conf.img = img
+        }
+
+        $('#width').addEventListener('change', function() {
+            const w = +$('#width').value
+            $('#canvas').width = w << 1
+            $('#canvas').style.width = w + 'px'
+            conf.width = w << 1
+        })
+
+
+        $('#height').addEventListener('change', function() {
+            const h = +$('#height').value
+            $('#canvas').height = h << 1
+            $('#canvas').style.height = h + 'px'
+            conf.height = h << 1
+        })
+
+        
+
+        image.addEventListener('change', () => {
+            const file = image.files[0]
+            fr.readAsDataURL(file)
+        })
+        $('#color').addEventListener('change', ()=>{
+            conf.color = $('#color').value
+        })
+
+        $('#text').addEventListener('change', () => {
+            conf.text = $('#text').value
+        })
+
+        $('#size').addEventListener('change', () => {
+            conf.size = +$('#size').value << 1
+        })
+
+        let moving = false
+        document.addEventListener('mousedown', (e)=>{
+            moving = true
+        })
+        document.addEventListener('mouseup', (e)=>{
+            moving = false
+        })
+        document.addEventListener('mousemove', (e)=>{
+            if (!moving) return;
+            conf.x = (e.pageX - canvas.offsetLeft) << 1//
+            conf.y = (e.pageY - canvas.offsetTop) << 1// 
+        })
+
+        function render() {
+            requestAnimationFrame(render)
+            ctx.clearRect(0,0, 10000, 10000)
+            if (conf.img) {
+                ctx.drawImage(conf.img, 0, 0, conf.width, conf.height)
+            }
+            if (conf.text) {
+                ctx.font = 'bold ' + conf.size + "px Arial";
+                ctx.fillStyle = conf.color
+                ctx.fillText(conf.text, conf.x, conf.y);
+            }
+        }
+        render()
+
+    </script>
+</body>
+</html>
