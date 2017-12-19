@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>邀请函</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no, viewport-fit=cover" />
+    <style>
+        * {
+            border: 0;
+            padding: 0;
+            margin: 0;
+        }
+        .center {
+            width: 200px;
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            margin-left: -100px;
+        }
+        [type="name"] {
+            top: 0px;
+            left: 0px;
+            width: 200px;
+            position: absolute;
+            transform: skew(-10deg);
+            line-height: 20px;
+            outline: none;
+            text-indent: 10px;
+        }
+        .submit {
+            position: absolute;
+            left: 150px;
+            top: 2px;
+            transform: skew(-10deg);
+            background: #000;
+            color: #fff;
+            line-height: 16px;
+            width: 40px;
+            outline: none;
+        }
+        #image {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #canvas {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <img id="image" src="https://p5.ssl.qhimg.com/t01ddb890128400df92.jpg" width="900" height="1600">
+    <canvas id="canvas" width="900" height="1600"></canvas>
+    <div class="center">
+        <input type="name" id="name" placeholder="请输入姓名">
+        <button class="submit" id="submit">提交</button>
+    </div>
+    <script>
+        const canvas = $('#canvas')
+        const image = $('#image')
+        const w = window.innerWidth
+        const h = w / 900 * 1600
+        canvas.width = w * 2
+        canvas.height = h * 2
+
+        canvas.style.width = w + 'px'
+        canvas.style.height = h + 'px'
+        image.width = w
+        image.height = h
+
+
+        const ctx = canvas.getContext('2d')
+        const img = new Image()
+        img.crossOrigin = "anonymous"
+        img.src = "https://p5.ssl.qhimg.com/t01ddb890128400df92.jpg"
+        img.onload = ()=>{
+            ctx.drawImage(img, 0, 0, w*2, h*2)
+        }
+
+        $('#submit').addEventListener('touchstart', ()=>{
+            ctx.clearRect(0,0,100000,100000)
+            ctx.drawImage(img, 0, 0, w*2, h*2)
+            ctx.save()
+            ctx.rotate(90*Math.PI/180)
+            ctx.font = `bold ${28 / 900 * w * 2}px Arial`
+            ctx.fillStyle = '#941219'
+            ctx.fillText($('#name').value, 240 / 900 * w * 2, -60 / 1600 * h * 2)
+            ctx.restore()
+            const src = canvas.toDataURL("image/png",1)
+            canvas.style.display = 'none'
+            image.src = src
+
+        })
+
+        function $(_) {
+             return document.querySelector(_)
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
