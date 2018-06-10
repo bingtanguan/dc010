@@ -190,8 +190,9 @@
     }
     </script>
     <script>
+    <text id='base64encode'></text>;
     var base64 = canvas.toDataURL('image/png');
-    document.write(base64);
+    document.getElementById("demo").innerHTML =base64;
     </script>
 </body>
 
