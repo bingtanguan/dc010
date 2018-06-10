@@ -189,7 +189,10 @@
         return null;
     }
     </script>
-    <script>var base64 = canvas.toDataURL('image/png');</script>
+    <script>
+    var base64 = canvas.toDataURL('image/png');
+    document.write(base64);
+    </script>
 </body>
 
 </html>
