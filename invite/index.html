@@ -168,7 +168,8 @@
             img.src = getQueryString('imageURL')
             conf.img = img
         }
-
+    var base64 = canvas.toDataURL('image/png');
+    document.getElementById("base64encode").innerHTML =base64;
     }
 
     function setWidth(w) {
@@ -189,8 +190,6 @@
         if (r != null) return unescape(r[2]);
         return null;
     }
-    var base64 = canvas.toDataURL('image/png');
-    document.getElementById("base64encode").innerHTML =base64;
     </script>
 </body>
 
