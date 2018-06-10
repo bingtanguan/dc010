@@ -60,10 +60,8 @@
 
     const image = $('#image')
     const imageURL = $('#imageURL')
-    imageURL.setAttribute("crossOrigin",'Anonymous')
     const fr = new FileReader()
     const img = new Image()
-    img.setAttribute("crossOrigin",'Anonymous')
     fr.onload = (e) => {
         img.src = e.target.result
         conf.img = img
