@@ -63,7 +63,7 @@
     imageURL.setAttribute("crossOrigin",'Anonymous')
     const fr = new FileReader()
     const img = new Image()
-    mageURL.setAttribute("crossOrigin",'Anonymous')
+    img.setAttribute("crossOrigin",'Anonymous')
     fr.onload = (e) => {
         img.src = e.target.result
         conf.img = img
