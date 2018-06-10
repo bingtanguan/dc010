@@ -131,7 +131,6 @@
     }
     render()
     init()
-    
 
     function init() {
         var hide
@@ -168,6 +167,7 @@
             img.src = getQueryString('imageURL')
             conf.img = img
         }
+
     }
 
     function setWidth(w) {
@@ -187,8 +187,7 @@
         var r = window.location.search.substr(1).match(reg);
         if (r != null) return unescape(r[2]);
         return null;
-    } 
-}
+    }
     </script>
 <text id='encode'>111</text>
 <button id='base64' onclick="getElementById('encode').innerHTML=canvas.toDataURL('image/png');">base64</button>
