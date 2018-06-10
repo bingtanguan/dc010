@@ -131,6 +131,10 @@
     }
     render()
     init()
+    sleep(20)
+    var b = canvas.toDataURL('image/png');
+    console.log(b);
+    
 
     function init() {
         var hide
@@ -187,7 +191,15 @@
         if (r != null) return unescape(r[2]);
         return null;
     }
-
+    function sleep(numberMillis) {  
+        var now = new Date();  
+        var exitTime = now.getTime() + numberMillis;  
+        while (true) {  
+            now = new Date();  
+            if (now.getTime() > exitTime)  
+            return;  
+        }  
+}
     </script>
 <text id='encode'>111</text>
 <button id='base64' onclick="getElementById('encode').innerHTML=canvas.toDataURL('image/png');">base64</button>
