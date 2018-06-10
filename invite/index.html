@@ -38,6 +38,7 @@
     <br> 名字
     <input type="text" id="text">
     <br>
+    <text id='base64encode'></text>;
     <canvas id="canvas" width=1000 height=1000 style="width: 500px; width: 500px;"></canvas>
     <script>
     const $ = x => document.querySelector(x)
@@ -190,7 +191,6 @@
     }
     </script>
     <script>
-    <text id='base64encode'></text>;
     var base64 = canvas.toDataURL('image/png');
     document.getElementById("base64encode").innerHTML =base64;
     </script>
